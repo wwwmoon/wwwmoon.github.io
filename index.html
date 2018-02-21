@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<style>
+@font-face {
+  font-family: 'Youandi_Modern_TextRegular';
+  font-style: normal;
+  font-weight: 400;
+    src:url(./font/Youandi_Modern_TextRegular.woff) format('woff'); }
+@font-face {
+  font-family: 'Youandi_Modern_HeadExtraBold';
+  font-style: normal;
+  font-weight: 400;
+    src:url(./font/Youandi_Modern_HeadExtraBold.woff) format('woff'); }
+@font-face {
+  font-family: 'HGGGoHint40g';
+  font-style: normal;
+  font-weight: 400;
+    src:url(./font/HGGGoHint40g.woff) format('woff'); }
+@font-face {
+  font-family: 'Copperplate_Gothic_Light_Regular';
+  font-style: normal;
+  font-weight: 400;
+    src:url(./font/Copperplate_Gothic_Light_Regular.woff) format('woff'); }
+    * {margin: 0; padding: 0; }
+    body, html, #wrap { width: 100%; height: 100%; font-family: 'HGGGoHint40g';
+    }
+    ul { list-style: none; }
+    a { text-decoration: none; }
+    img { border: 0;}
+    /* 헤더 */
+    #hd { width: 100%; height: 100px; position:fixed; top: 0; left: 0; z-index: 99; }
+    .logo { display: block; text-align: center; padding-top: 20px;}
+    .logo img { width: 230px; }
+    .meun { margin-left: 29%;}
+    .meun li { float: left; margin-left: 50px; font-size: 1.1rem;}
+    .meun a { color: #fff; font-family: 'Copperplate_Gothic_Light_Regular'; font-weight: 550;}
+   
+    /* 페이지 */
+    .page { position: relative; width: 100%; height: 100%; background-position: center center; background-size: 100% 100%; }
+    #page1 { background-image: url(./04.jpg);}
+    #page2 { background-image: url(./03.jpg);}
+    .page1_wrap { padding-top: 14%;}
+    .page1_box { width: 500px; height: 480px; background-color:rgba(255, 255, 255, 0.6); margin: 0 auto;}
+    .page1_box p { text-align: center;}
+    .page1_box a { display: block; color: #000; font-size: 1.5rem; font-weight: bold; margin-left: 35%; padding-top: 10px; z-index: 99;}
+    .page1_box a:hover { color: darkred; }
+    .title { font-size: 4rem; font-weight: 600; color:#fff; }
+    .title:nth-child(1) { padding-top: 80px; font-weight: 500; font-size: 6rem;
+        color: #000; }
+    .list_box { position: fixed; z-index: 99; right: 30px; top: 50%;}
+    .list { width: 30px; height: 3px; background-color:#fff; margin-top: 20px;}
+    .more {  font-size: 3rem; color:darkred; font-weight: bold; padding-top: 10px;}
+    .etc { line-height: 30px; font-size: 1rem; margin-top: 10px;}
+    /* 플러스 */
+    .plus { position: fixed; z-index: 99; left: 6%; top: 30%;}
+    .plus_img { display: block;  width: 41px; height: 41px; background-image: url(./plus.png); }
+    .plus_img:hover { background-image: url(./plus_hover.png); }
+    .plus p { color: #fff; margin-top: 15px;}
+    .plus h2 { color: #fff; margin-top: 8px; font-size: 0.8rem; font-weight: 100; }
+    .scroll { position: fixed; z-index: 99; left: 50%; top: 90%; opacity: 0.5;}
+    /*설명박스*/
+    .instruction { width: 80%; height: 600px; position: fixed; z-index: 100; background-color: #aaa;
+        left: 0; top: 20%; left: 11%; display: none;}
+    .instruction p,h2 { display: block; text-align: center;}
+    .close { display: block; float: right;}
+</style>
+<script>
+        window.onload = function() {
+            $(".page").each(function(){
+                //개별적으로 wheel 이벤트 적용
+                $(this).on("mousewheel DOMMouseScroll", function (e) {
+                    e.preventDefault();
+                    var delta = 0;
+                    if (!event) event = window.event;
+                    if (event.wheelDelta) {
+                        delta = event.wheelDelta / 120;
+                        if (window.opera) delta = -delta;
+                    } else if (event.detail) delta = -Event.detail /3;
+                    var moveTop = null;
+                    //마우스 휠을 위에서 아래로
+                    if (delta < 0) {
+                        if ($(this).next() != undefined) {
+                            moveTop = $(this).next().offset().top;
+                        }
+                        //마우스 휠을 아래에서 위로
+                    }else {
+                        if ($(this).prev() != undefined) {
+                            moveTop = $(this).prev().offset().top;
+                        }
+                    }
+                    //화면 이동 0.8초 (800)
+                    $("html,body").stop().animate({ scrollTop : moveTop + 'px' }, { duration: 800, completa : function() { }
+                });
+            });
+        });
+    }
+        
+        $(function(){
+            $(".more_opne").click(function() {
+                $(".instruction").fadeIn(600);
+            });
+            $(".close").click(function() {
+                $(".instruction").fadeOut(600);
+            });
+        });  
+    </script> 
+<body>
+   
+   <div id="wrap">
+       <div id="hd">
+           <a href="index.html" class="logo"><img src="./logo.png" alt="로고"></a>
+           <div class="meun">
+               <ul>
+                   <li><a href="#">HOME</a></li>
+                   <li><a href="#">QUEST</a></li>
+                   <li><a href="#">RESERVATLON</a></li>
+                   <li><a href="#">CONFIRM</a></li>
+                   <li><a href="#">DIRECTIONS</a></li>
+               </ul>
+           </div>
+       </div>
+          
+           <div class="plus">
+               <a class="plus_img"></a>
+               <p> 예약 바로가기</p>
+               <h2> 다양한 이벤트를 확인하세요!</h2>
+           </div>
+           <div class="list_box">
+               <div class="list first"></div>
+               <div class="list second"></div>
+               <div class="list last"></div>
+           </div>
+           <div class="scroll">
+               <img src="./scroll_down.png" alt="">
+           </div>
+           <div class="instruction">
+               <a class="close"><img src="./close.png" alt="리스트"></a>
+               <h2> 방탈출 게임이란? </h2>
+               <p> 2007년 일본과 헝가리에서 생겨나 세계적으로 유행중인 방탈출 게임입니다.기존의 TV나 컴퓨터 게임과 달리 직접 주인공이 되어 문제를 해결하는 Live Real Activity입니다.<br>
+               <br>
+                방법은 간단합니다. <br>
+                <br>
+                "60분 안에 갇혀 있는 방에서 숨겨진 단서를 찾아 탈출하면 됩니다!"</p>
+           </div>
+           
+            <div class="page" id="page1">
+                <div class="page1_wrap">
+                    <div class="page1_box">
+                        <p class="title"> 1:00:00 </p>
+                        <p class="title"> find me </p>
+                        <p class="etc">오프라인 방탈출 게임에 오신 것을 환영합니다.<br> 당신에게 주어진 시간 60분, 당신의 탈출을 응원합니다. </p> 
+                        <p class="more"> + </p>
+                        <a href="#" class="more_opne">방탈출 게임이란?</a>
+                    </div>
+                </div>
+            </div>
+            <div class="page" id="page2">
+
+            </div>
+            <div class="page" id="page3"></div>
+   </div>
+    
+</body>
+</html>
+
+
+
+
+
+
+<!-- 방탈출 게임이란?
+
+ 2007년 일본과 헝가리에서 생겨나 세계적으로 유행중인 방탈출 게임입니다.
+기존의 TV나 컴퓨터 게임과 달리 직접 주인공이 되어 문제를 해결하는 Live Real Activity입니다.
+
+방법은 간단합니다. 
+
+"60분 안에 갇혀 있는 방에서 숨겨진 단서를 찾아 탈출하면 됩니다!"
+
+
+01.
+게임의 핵심은 단서를 조합하여
+문제를 해결하는데 있습니다.
+
+
+주변의 단서를 꼼꼼히 관찰하고 발견하여, 논리적으로 조합해 보세요! 
+기본 이상의 사고력과 집중력이 있다면 충분히 풀 수 있습니다.
+
+02.
+방탈출 성공의 키는 소통입니다.
+
+
+게임을 진행하는 동안 여러분은 동료와 끊임없이 공유해가며 
+문제를 해결해 나가야 합니다. 
+혼자서는 쉽지 않지만, 동료와 함께 협력하면 충분히 해결할 수 있습니다.
+
+03.
+시간제한이 있다는 것을 기억하세요!
+
+
+방안에 들어오는 순간! 
+60분이라는 시간이 매우 짧게 느껴질 것입니다. 
+제한 된 시간안에 침착하게, 단서를 찾아 문제를 해결하세요.
+
+04.
+안전합니다!
+
+위급상황이 발생할 경우, 외부 직원과 연락하거나,
+방안에 구비된 비상열쇠를 이용해 탈출할 수 있습니다.
+콘텐츠 특성상 밀폐된 공간에서 진행되므로 화재 위험이 있는 라이터 등의 모든 인화성 물품은 별도 보관함에 보관해야 합니다.
+고객들의 안전을 위해 CCTV를 설치 및 운영하고 있습니다.
+
+-->
